@@ -1,6 +1,7 @@
 use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::Duration;
+use std::fs::create_dir_all;
 
 use anyhow::{anyhow, Result};
 use async_hofs::iter::AsyncMapExt;
@@ -184,6 +185,18 @@ impl Cmd {
         if path.exists() {
             warn!("Directory already exists. Skipping cloning the repository...");
         } else {
+            let parent_path = path
+                .parent()
+                .ok_or_else(|| {
+                    anyhow!(
+                        "Failed to determine parent path for the repository's new location: {}",
+                        path.to_string_lossy()
+                    )
+                })?
+                .to_path_buf();
+
+            create_dir_all(parent_path)?;
+
             let mut retries = 0;
             while let Err(e) = config.git.strategy.clone.clone_repository(
                 url.clone(),
