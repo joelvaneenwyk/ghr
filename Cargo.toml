@@ -13,7 +13,7 @@ authors = [
 ]
 
 [dependencies]
-anyhow = "1.0"
+anyhow = "1.0.93"
 async-hofs = "0.1.1"
 async-trait = "0.1.83"
 build-info = "0.0.39"
