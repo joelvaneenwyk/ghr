@@ -5,7 +5,6 @@ use std::result::Result as StdResult;
 
 use anyhow::Result;
 use git2::Repository;
-use itertools::Itertools;
 use serde::de::{MapAccess, Visitor};
 use serde::ser::SerializeMap;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
@@ -92,10 +91,9 @@ impl Serialize for Configs {
     {
         let mut map = serializer.serialize_map(None)?;
 
-        self.to_toml()
-            .iter()
-            .map(|(k, v)| map.serialize_entry(k, v))
-            .try_collect()?;
+        for (k, v) in self.to_toml() {
+            map.serialize_entry(&k, &v)?;
+        }
 
         map.end()
     }
