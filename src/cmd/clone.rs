@@ -10,7 +10,7 @@ use console::style;
 use git2::Repository;
 use tokio::time::sleep;
 use tokio_stream::StreamExt;
-use tracing::{info, warn};
+use tracing::{debug, info, warn};
 
 use crate::config::Config;
 use crate::console::{MultiSpinner, Spinner};
@@ -185,6 +185,11 @@ impl Cmd {
         if path.exists() {
             warn!("Directory already exists. Skipping cloning the repository...");
         } else {
+            debug!(
+                "Generating parent directories: {}",
+                path.to_str().unwrap_or_default(),
+            );
+
             let parent_path = path
                 .parent()
                 .ok_or_else(|| {
