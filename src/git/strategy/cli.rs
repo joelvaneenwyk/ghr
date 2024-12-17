@@ -1,4 +1,4 @@
-use std::path::{Path};
+use std::path::Path;
 use std::process::Command;
 
 use anyhow::anyhow;
@@ -9,7 +9,6 @@ use crate::git::{CheckoutBranch, CloneOptions, CloneRepository, Fetch};
 pub struct Cli;
 
 impl CloneRepository for Cli {
-
     fn clone_repository<U, P>(&self, url: U, path: P, options: &CloneOptions) -> anyhow::Result<()>
     where
         U: ToString,
