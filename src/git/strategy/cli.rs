@@ -16,10 +16,14 @@ impl CloneRepository for Cli {
     {
         debug!("Cloning the repository using CLI strategy");
 
+        // Convert `path` to `&Path` and pass it to `dunce::simplified`
+        let simplified_path = dunce::simplified(path.as_ref());
+        let path_local = simplified_path.to_string_lossy(); // Use lossless conversion to String
+
         let mut args = vec![
             "clone".to_string(),
             url.to_string(),
-            path.as_ref().to_string_lossy().to_string(),
+            path_local.into_owned(), // Convert Cow<str> into String
         ];
 
         if let Some(recursive) = options.recursive.as_ref() {
@@ -38,6 +42,7 @@ impl CloneRepository for Cli {
             args.push(format!("--branch={branch}"));
         }
 
+        debug!("Executing: git {}", args.join(" "));
         let output = Command::new("git").args(args).output()?;
         match output.status.success() {
             true => Ok(()),

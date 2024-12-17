@@ -1,3 +1,4 @@
+use std::fs::create_dir_all;
 use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::Duration;
@@ -9,7 +10,7 @@ use console::style;
 use git2::Repository;
 use tokio::time::sleep;
 use tokio_stream::StreamExt;
-use tracing::{info, warn};
+use tracing::{debug, info, warn};
 
 use crate::config::Config;
 use crate::console::{MultiSpinner, Spinner};
@@ -184,6 +185,23 @@ impl Cmd {
         if path.exists() {
             warn!("Directory already exists. Skipping cloning the repository...");
         } else {
+            debug!(
+                "Generating parent directories: {}",
+                path.to_str().unwrap_or_default(),
+            );
+
+            let parent_path = path
+                .parent()
+                .ok_or_else(|| {
+                    anyhow!(
+                        "Failed to determine parent path for the repository's new location: {}",
+                        path.to_string_lossy()
+                    )
+                })?
+                .to_path_buf();
+
+            create_dir_all(parent_path)?;
+
             let mut retries = 0;
             while let Err(e) = config.git.strategy.clone.clone_repository(
                 url.clone(),
