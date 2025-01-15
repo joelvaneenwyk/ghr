@@ -1,11 +1,11 @@
 version: "0.2"
 ignorePaths: []
 dictionaryDefinitions:
-    - name: ghr
-      path: ./.github/config/ghr.dict
-      addWords: true
+  - name: ghr
+    path: ./.github/config/ghr.dict
+    addWords: true
 dictionaries:
-    - ghr
+  - ghr
 words: []
 ignoreWords: []
 import: []
