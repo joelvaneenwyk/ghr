@@ -17,37 +17,10 @@ So I have rewritten them as simple, in Rust, the robust and modern language toda
 
 ## 📦 Installation
 
-### macOS / Using Homebrew (easy)
-
-```shell
-brew install s6n-jp/tap/ghr
-```
-
-To upgrade:
-
-```shell
-brew upgrade s6n-jp/tap/ghr
-```
-
-### Windows / Using scoop (easy)
-
-```shell
-scoop bucket add siketyan https://github.com/siketyan/scoop-bucket.git
-scoop install ghr
-```
-
-To upgrade:
-
-```shell
-scoop update ghr
-```
-
-### Any OS / Using cargo (classic)
-
 If you have not installed Rust environment, follow the instruction of [rustup](https://rustup.rs/).
 
 ```shell
-cargo install ghr
+cargo install --git https://github.com/joelvaneenwyk/ghr ghr
 ```
 
 For upgrading, we recommend to use [cargo-update](https://github.com/nabijaczleweli/cargo-update).
@@ -87,7 +60,7 @@ ghr shell fish --completion | source
 
 ## 💚 Usages
 
-```
+```text
 Usage: ghr <COMMAND>
 
 Commands:
