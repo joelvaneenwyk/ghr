@@ -2,10 +2,12 @@ anstream
 anstyle
 autocfg
 bindgen
+binstall
 bitflags
 bumpalo
 camino
 chrono
+clippy
 colorchoice
 corasick
 cpufeatures
@@ -15,12 +17,14 @@ demangle
 dialoguer
 displaydoc
 distroless
+dtolnay
 endi
 enumflags
 errno
 fastrand
 getrandom
 gimli
+giraffate
 hashbrown
 hkdf
 hmac
@@ -38,6 +42,7 @@ libgit
 locid
 memchr
 miniz
+msvc
 Naoki
 nucleo
 octocrab
@@ -50,7 +55,10 @@ serde
 siketyan
 smallvec
 strsim
+svenstaro
+Swatinem
 thiserror
+tlsv
 typenum
 tzdata
 walkdir
