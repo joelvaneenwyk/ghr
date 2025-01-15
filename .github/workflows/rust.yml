@@ -16,7 +16,7 @@ env:
 
 jobs:
   checks:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -25,7 +25,6 @@ jobs:
       - name: Install latest stable
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.target }}
           components: rustfmt,clippy
 
       - name: Run rustfmt
@@ -34,7 +33,7 @@ jobs:
       - name: Run clippy
         uses: giraffate/clippy-action@v1
         with:
-          reporter: 'github-pr-check'
+          reporter: "github-pr-check"
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run tests
@@ -156,14 +155,14 @@ jobs:
       - name: Release to Scoop Bucket
         uses: siketyan/release-to-registry-action@7e2a91ef78e61dccdb2e8b9401ae54ec58fab4fc
         with:
-          path: 'ghr.json'
+          path: "ghr.json"
           assets: |-
             windows_x86_64=ghr-x86_64-pc-windows-msvc.tar.gz
-          message: 'feat(ghr): Release ${{ github.event.release.tag_name }}'
-          template: './resources/scoop/ghr.json.mustache'
-          token: '${{ secrets.SCOOP_BUCKET_TOKEN }}'
-          hash: 'sha256'
-          targetRepo: 'scoop-bucket'
-          branch: 'ghr/${{ github.event.release.tag_name }}'
-          author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
-          committer: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
+          message: "feat(ghr): Release ${{ github.event.release.tag_name }}"
+          template: "./resources/scoop/ghr.json.mustache"
+          token: "${{ secrets.SCOOP_BUCKET_TOKEN }}"
+          hash: "sha256"
+          targetRepo: "scoop-bucket"
+          branch: "ghr/${{ github.event.release.tag_name }}"
+          author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
