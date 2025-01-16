@@ -8,7 +8,7 @@ pub enum Kind {
     #[default]
     Bash,
     Fish,
-    Batch
+    Batch,
 }
 
 impl Display for Kind {
