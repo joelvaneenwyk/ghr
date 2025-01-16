@@ -8,6 +8,7 @@ pub enum Kind {
     #[default]
     Bash,
     Fish,
+    Batch
 }
 
 impl Display for Kind {
@@ -18,6 +19,7 @@ impl Display for Kind {
             match self {
                 Kind::Bash => "bash",
                 Kind::Fish => "fish",
+                Kind::Batch => "batch",
             },
         )
     }
@@ -44,6 +46,10 @@ impl Cmd {
             Kind::Fish => match self.completion {
                 true => include_str!("../../resources/shell/fish/ghr-completion.fish"),
                 _ => include_str!("../../resources/shell/fish/ghr.fish"),
+            },
+            Kind::Batch => match self.completion {
+                true => include_str!("../../resources/shell/batch/ghr-completion.cmd"),
+                _ => include_str!("../../resources/shell/batch/ghr.cmd"),
             },
         };
 
