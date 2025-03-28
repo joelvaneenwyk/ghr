@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # get the current directory and generate the JSON file path
-current_dir=$(pwd)
+current_dir="$(pwd)"
 json_file_path="$current_dir/repos.json"
 
 # Get the list of all managed repositories (excluding debug messages and `.git` internal paths)
@@ -65,7 +65,6 @@ for path in "${repo_paths[@]}"; do
         else
             state="🔄 Synced"
         fi
-
 
         # Update JSON content
         content=$(<"$json_file_path")
